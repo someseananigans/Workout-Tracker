@@ -10,6 +10,6 @@ app.use(express.json())
 
 app.use(require('./routes'))
 
-require('./config')
+require('./db')
   .then(() => app.listen(PORT))
   .catch(err => console.log(err))
