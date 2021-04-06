@@ -9,7 +9,7 @@ router.get('/workouts', (req, res) => {
 })
 // get workouts in range
 router.get('/workouts/range', (req, res) => {
-  Workout.find(req.body).limit(7)
+  Workout.find().limit(7)
     .then(workouts => res.json(workouts))
     .catch(err => console.log(err))
 })
@@ -21,20 +21,19 @@ router.get('/workout/:id', (req, res) => {
 })
 // create a workout
 router.post('/workouts', (req, res) => {
-  console.log(req.body)
-  Workout.create(req.body)
-    .then(() => res.sendStatus(200))
+  Workout.create({})
+    .then(workout => res.json(workout))
     .catch(err => console.log(err))
 })
 // update a workout
 router.put('/workouts/:id', (req, res) => {
-  Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body }})
+  Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } })
     .then(workout => res.json(workout))
     .catch(err => console.log(err))
 })
 // delete a workout
-router.delete('/workout/:id', (req, res) => {
-  Workout.findByIdAndRemove(req.params.id)
+router.delete('/workouts', (req, res) => {
+  Workout.findByIdAndRemove(req.body.id)
     .then(workout => res.json(workout))
     .catch(err => console.log(err))
 })
