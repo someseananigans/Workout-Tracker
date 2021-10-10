@@ -21,7 +21,7 @@ router.get('/workout/:id', (req, res) => {
 })
 // create a workout
 router.post('/workouts', (req, res) => {
-  Workout.create({})
+  Workout.create(req.body)
     .then(workout => res.json(workout))
     .catch(err => console.log(err))
 })
